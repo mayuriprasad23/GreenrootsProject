@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenRoots Admin - NGO Dashboard</title>
+  <link rel="stylesheet" href="admin-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-content">
+    <div class="spinner"></div>
+    <h2>Loading Dashboard...</h2>
+  </div>
+</div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <i class="fas fa-leaf"></i>
+      <span>GreenRoots Admin</span>
+    </div>
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="ngo-profile">
+    <div class="ngo-avatar">
+      <i class="fas fa-hands-helping"></i>
+    </div>
+    <h3>EcoWarriors NGO</h3>
+    <p class="ngo-id">ID: NGO-2024-001</p>
+    <span class="status-badge active">Active</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#dashboard" class="nav-item active" data-section="dashboard">
+      <i class="fas fa-chart-line"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="#user-registrations" class="nav-item" data-section="user-registrations">
+      <i class="fas fa-user-plus"></i>
+      <span>User Registrations</span>
+      <span class="notification-badge">12</span>
+    </a>
+    <a href="#locations" class="nav-item" data-section="locations">
+      <i class="fas fa-map-marker-alt"></i>
+      <span>Active Locations</span>
+    </a>
+    <a href="#events" class="nav-item" data-section="events">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Events Management</span>
+    </a>
+    <a href="#notifications" class="nav-item" data-section="notifications">
+      <i class="fas fa-bell"></i>
+      <span>Send Notifications</span>
+    </a>
+    <a href="#trees" class="nav-item" data-section="trees">
+      <i class="fas fa-tree"></i>
+      <span>Tree Database</span>
+    </a>
+    <a href="#analytics" class="nav-item" data-section="analytics">
+      <i class="fas fa-chart-pie"></i>
+      <span>Analytics</span>
+    </a>
+    <a href="#settings" class="nav-item" data-section="settings">
+      <i class="fas fa-cog"></i>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="btn-logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-left">
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h1 id="pageTitle">Dashboard Overview</h1>
+    </div>
+    <div class="header-right">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search registrations, events...">
+      </div>
+      <div class="header-notifications">
+        <button class="icon-btn">
+          <i class="fas fa-bell"></i>
+          <span class="badge">5</span>
+        </button>
+      </div>
+      <div class="admin-profile">
+        <img src="https://ui-avatars.com/api/?name=Admin+User&background=228B22&color=fff" alt="Admin">
+        <span>Admin User</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard-section" class="content-section active">
+    <div class="section-header">
+      <h2>Dashboard Overview</h2>
+      <div class="quick-actions">
+        <button class="btn btn-primary" onclick="openModal('createEventModal')">
+          <i class="fas fa-plus"></i> Create Event
+        </button>
+        <button class="btn btn-secondary" onclick="switchSection('notifications')">
+          <i class="fas fa-paper-plane"></i> Send Notification
+        </button>
+      </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <h3>New Registrations</h3>
+          <p class="stat-number">127</p>
+          <span class="stat-change positive">+12% this week</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <i class="fas fa-tree"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Trees Planted</h3>
+          <p class="stat-number">3,456</p>
+          <span class="stat-change positive">+234 this month</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon orange">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Active Events</h3>
+          <p class="stat-number">8</p>
+          <span class="stat-change">3 upcoming</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Active Locations</h3>
+          <p class="stat-number">15</p>
+          <span class="stat-change">Across Mumbai</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>User Registrations Trend</h3>
+          <select class="chart-filter">
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>Last 3 months</option>
+          </select>
+        </div>
+        <canvas id="registrationsChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3>Trees by Location</h3>
+        </div>
+        <canvas id="locationsChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="activity-section">
+      <h3>Recent Activity</h3>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon new">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div class="activity-content">
+            <h4>New Registration</h4>
+            <p>Priya Sharma registered for South Mumbai location</p>
+            <span class="activity-time">5 minutes ago</span>
+          </div>
+          <button class="btn-small btn-primary">View</button>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon success">
+            <i class="fas fa-tree"></i>
+          </div>
+          <div class="activity-content">
+            <h4>Tree Planted</h4>
+            <p>15 Neem trees planted at Bandra West</p>
+            <span class="activity-time">1 hour ago</span>
+          </div>
+          <button class="btn-small btn-outline">Details</button>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon info">
+            <i class="fas fa-calendar"></i>
+          </div>
+          <div class="activity-content">
+            <h4>Event Registration</h4>
+            <p>23 users registered for "Mumbai Monsoon Plantation"</p>
+            <span class="activity-time">3 hours ago</span>
+          </div>
+          <button class="btn-small btn-outline">View</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Registrations Section -->
+  <section id="user-registrations-section" class="content-section">
+    <div class="section-header">
+      <h2>User Registrations</h2>
+      <div class="filter-controls">
+        <select class="filter-select">
+          <option>All Locations</option>
+          <option>South Mumbai</option>
+          <option>Central Mumbai</option>
+          <option>Western Suburbs</option>
+          <option>Eastern Suburbs</option>
+          <option>Navi Mumbai</option>
+          <option>Thane</option>
+        </select>
+        <select class="filter-select">
+          <option>All Status</option>
+          <option>Pending</option>
+          <option>Contacted</option>
+          <option>Approved</option>
+        </select>
+        <button class="btn btn-outline">
+          <i class="fas fa-download"></i> Export
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox"></th>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Preferred Location</th>
+            <th>Registration Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="registrationsTableBody">
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>#USR-001</td>
+            <td>
+              <div class="user-cell">
+                <img src="https://ui-avatars.com/api/?name=Priya+Sharma&background=4CAF50&color=fff" alt="User">
+                <span>Priya Sharma</span>
+              </div>
+            </td>
+            <td>
+              <div class="contact-cell">
+                <div><i class="fas fa-phone"></i> +91 98765 43210</div>
+                <div><i class="fas fa-envelope"></i> priya.sharma@email.com</div>
+              </div>
+            </td>
+            <td><span class="location-tag">South Mumbai</span></td>
+            <td>Oct 25, 2024</td>
+            <td><span class="status-badge pending">Pending</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" onclick="viewUserDetails('USR-001')" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn-icon green" onclick="openNotifyModal('USR-001')" title="Send Notification">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+                <button class="btn-icon blue" onclick="markAsContacted('USR-001')" title="Mark as Contacted">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>#USR-002</td>
+            <td>
+              <div class="user-cell">
+                <img src="https://ui-avatars.com/api/?name=Rahul+Verma&background=2196F3&color=fff" alt="User">
+                <span>Rahul Verma</span>
+              </div>
+            </td>
+            <td>
+              <div class="contact-cell">
+                <div><i class="fas fa-phone"></i> +91 98765 43211</div>
+                <div><i class="fas fa-envelope"></i> rahul.verma@email.com</div>
+              </div>
+            </td>
+            <td><span class="location-tag">Western Suburbs</span></td>
+            <td>Oct 24, 2024</td>
+            <td><span class="status-badge contacted">Contacted</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" onclick="viewUserDetails('USR-002')" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn-icon green" onclick="openNotifyModal('USR-002')" title="Send Notification">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+                <button class="btn-icon blue" onclick="markAsContacted('USR-002')" title="Mark as Contacted">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>#USR-003</td>
+            <td>
+              <div class="user-cell">
+                <img src="https://ui-avatars.com/api/?name=Anjali+Desai&background=FF9800&color=fff" alt="User">
+                <span>Anjali Desai</span>
+              </div>
+            </td>
+            <td>
+              <div class="contact-cell">
+                <div><i class="fas fa-phone"></i> +91 98765 43212</div>
+                <div><i class="fas fa-envelope"></i> anjali.desai@email.com</div>
+              </div>
+            </td>
+            <td><span class="location-tag">Central Mumbai</span></td>
+            <td>Oct 23, 2024</td>
+            <td><span class="status-badge approved">Approved</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" onclick="viewUserDetails('USR-003')" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn-icon green" onclick="openNotifyModal('USR-003')" title="Send Notification">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+                <button class="btn-icon blue" onclick="markAsContacted('USR-003')" title="Mark as Contacted">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>#USR-004</td>
+            <td>
+              <div class="user-cell">
+                <img src="https://ui-avatars.com/api/?name=Vikram+Singh&background=9C27B0&color=fff" alt="User">
+                <span>Vikram Singh</span>
+              </div>
+            </td>
+            <td>
+              <div class="contact-cell">
+                <div><i class="fas fa-phone"></i> +91 98765 43213</div>
+                <div><i class="fas fa-envelope"></i> vikram.singh@email.com</div>
+              </div>
+            </td>
+            <td><span class="location-tag">Navi Mumbai</span></td>
+            <td>Oct 22, 2024</td>
+            <td><span class="status-badge pending">Pending</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" onclick="viewUserDetails('USR-004')" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn-icon green" onclick="openNotifyModal('USR-004')" title="Send Notification">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+                <button class="btn-icon blue" onclick="markAsContacted('USR-004')" title="Mark as Contacted">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>#USR-005</td>
+            <td>
+              <div class="user-cell">
+                <img src="https://ui-avatars.com/api/?name=Meera+Patel&background=F44336&color=fff" alt="User">
+                <span>Meera Patel</span>
+              </div>
+            </td>
+            <td>
+              <div class="contact-cell">
+                <div><i class="fas fa-phone"></i> +91 98765 43214</div>
+                <div><i class="fas fa-envelope"></i> meera.patel@email.com</div>
+              </div>
+            </td>
+            <td><span class="location-tag">Thane</span></td>
+            <td>Oct 21, 2024</td>
+            <td><span class="status-badge contacted">Contacted</span></td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-icon" onclick="viewUserDetails('USR-005')" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button class="btn-icon green" onclick="openNotifyModal('USR-005')" title="Send Notification">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+                <button class="btn-icon blue" onclick="markAsContacted('USR-005')" title="Mark as Contacted">
+                  <i class="fas fa-check"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button class="btn-outline">Previous</button>
+      <div class="page-numbers">
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <span>...</span>
+        <button>10</button>
+      </div>
+      <button class="btn-outline">Next</button>
+    </div>
+  </section>
+
+  <!-- Active Locations Section -->
+  <section id="locations-section" class="content-section">
+    <div class="section-header">
+      <h2>Active Locations Management</h2>
+      <button class="btn btn-primary" onclick="openModal('addLocationModal')">
+        <i class="fas fa-plus"></i> Add Location
+      </button>
+    </div>
+
+    <div class="locations-grid">
+      <div class="location-card">
+        <div class="location-header">
+          <h3>South Mumbai</h3>
+          <span class="location-status active">Active</span>
+        </div>
+        <div class="location-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>45 Users</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-tree"></i>
+            <span>234 Trees</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-calendar"></i>
+            <span>3 Events</span>
+          </div>
+        </div>
+        <div class="location-map-preview">
+          <div id="map-south-mumbai" class="mini-map"></div>
+        </div>
+        <div class="location-actions">
+          <button class="btn btn-outline" onclick="viewLocationDetails('south-mumbai')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button class="btn btn-primary" onclick="notifyLocationUsers('south-mumbai')">
+            <i class="fas fa-bell"></i> Notify Users
+          </button>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Western Suburbs</h3>
+          <span class="location-status active">Active</span>
+        </div>
+        <div class="location-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>38 Users</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-tree"></i>
+            <span>187 Trees</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-calendar"></i>
+            <span>2 Events</span>
+          </div>
+        </div>
+        <div class="location-map-preview">
+          <div id="map-western" class="mini-map"></div>
+        </div>
+        <div class="location-actions">
+          <button class="btn btn-outline" onclick="viewLocationDetails('western-suburbs')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button class="btn btn-primary" onclick="notifyLocationUsers('western-suburbs')">
+            <i class="fas fa-bell"></i> Notify Users
+          </button>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Central Mumbai</h3>
+          <span class="location-status active">Active</span>
+        </div>
+        <div class="location-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>52 Users</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-tree"></i>
+            <span>298 Trees</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-calendar"></i>
+            <span>4 Events</span>
+          </div>
+        </div>
+        <div class="location-map-preview">
+          <div id="map-central" class="mini-map"></div>
+        </div>
+        <div class="location-actions">
+          <button class="btn btn-outline" onclick="viewLocationDetails('central-mumbai')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button class="btn btn-primary" onclick="notifyLocationUsers('central-mumbai')">
+            <i class="fas fa-bell"></i> Notify Users
+          </button>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Eastern Suburbs</h3>
+          <span class="location-status active">Active</span>
+        </div>
+        <div class="location-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>29 Users</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-tree"></i>
+            <span>156 Trees</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-calendar"></i>
+            <span>1 Event</span>
+          </div>
+        </div>
+        <div class="location-map-preview">
+          <div id="map-eastern" class="mini-map"></div>
+        </div>
+        <div class="location-actions">
+          <button class="btn btn-outline" onclick="viewLocationDetails('eastern-suburbs')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button class="btn btn-primary" onclick="notifyLocationUsers('eastern-suburbs')">
+            <i class="fas fa-bell"></i> Notify Users
+          </button>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Navi Mumbai</h3>
+          <span class="location-status active">Active</span>
+        </div>
+        <div class="location-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>34 Users</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-tree"></i>
+            <span>203 Trees</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-calendar"></i>
+            <span>2 Events</span>
+          </div>
+        </div>
+        <div class="location-map-preview">
+          <div id="map-navi" class="mini-map"></div>
+        </div>
+        <div class="location-actions">
+          <button class="btn btn-outline" onclick="viewLocationDetails('navi-mumbai')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button class="btn btn-primary" onclick="notifyLocationUsers('navi-mumbai')">
+            <i class="fas fa-bell"></i> Notify Users
+          </button>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Thane</h3>
+          <span class="location-status active">Active</span>
+        </div>
+        <div class="location-stats">
+          <div class="stat-item">
+            <i class="fas fa-users"></i>
+            <span>27 Users</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-tree"></i>
+            <span>142 Trees</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-calendar"></i>
+            <span>1 Event</span>
+          </div>
+        </div>
+        <div class="location-map-preview">
+          <div id="map-thane" class="mini-map"></div>
+        </div>
+        <div class="location-actions">
+          <button class="btn btn-outline" onclick="viewLocationDetails('thane')">
+            <i class="fas fa-eye"></i> View Details
+          </button>
+          <button class="btn btn-primary" onclick="notifyLocationUsers('thane')">
+            <i class="fas fa-bell"></i> Notify Users
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Management Section -->
+  <section id="events-section" class="content-section">
+    <div class="section-header">
+      <h2>Events Management</h2>
+      <button class="btn btn-primary" onclick="openModal('createEventModal')">
+        <i class="fas fa-plus"></i> Create New Event
+      </button>
+    </div>
+
+    <div class="events-tabs">
+      <button class="tab-btn active" data-tab="upcoming">Upcoming Events</button>
+      <button class="tab-btn" data-tab="past">Past Events</button>
+      <button class="tab-btn" data-tab="draft">Drafts</button>
+    </div>
+
+   <div id="eventsList" class="events-list">
+  <!-- Events will load here dynamically -->
+</div>
+
+
+      <div class="event-item">
+        <div class="event-date-badge">
+          <div class="date">22</div>
+          <div class="month">NOV</div>
+        </div>
+        <div class="event-details">
+          <h3>Corporate Green Initiative</h3>
+          <p class="event-location"><i class="fas fa-map-marker-alt"></i> BKC Business District, Western Suburbs</p>
+          <p class="event-time"><i class="fas fa-clock"></i> 9:00 AM - 1:00 PM</p>
+          <div class="event-meta">
+            <span class="meta-item"><i class="fas fa-users"></i> 28 Registered</span>
+            <span class="meta-item"><i class="fas fa-tree"></i> Target: 150 trees</span>
+          </div>
+        </div>
+        <div class="event-actions">
+          <button class="btn btn-outline" onclick="viewEvent('evt-002')">
+            <i class="fas fa-eye"></i> View
+          </button>
+          <button class="btn btn-primary" onclick="notifyEventParticipants('evt-002')">
+            <i class="fas fa-bell"></i> Notify
+          </button>
+          <button class="btn btn-secondary" onclick="editEvent('evt-002')">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+        </div>
+      </div>
+
+      <div class="event-item">
+        <div class="event-date-badge">
+          <div class="date">30</div>
+          <div class="month">NOV</div>
+        </div>
+        <div class="event-details">
+          <h3>Community Greenery Day</h3>
+          <p class="event-location"><i class="fas fa-map-marker-alt"></i> Thane Creek, Thane</p>
+          <p class="event-time"><i class="fas fa-clock"></i> 7:00 AM - 11:00 AM</p>
+          <div class="event-meta">
+            <span class="meta-item"><i class="fas fa-users"></i> 62 Registered</span>
+            <span class="meta-item"><i class="fas fa-tree"></i> Target: 300 trees</span>
+          </div>
+        </div>
+        <div class="event-actions">
+          <button class="btn btn-outline" onclick="viewEvent('evt-003')">
+            <i class="fas fa-eye"></i> View
+          </button>
+          <button class="btn btn-primary" onclick="notifyEventParticipants('evt-003')">
+            <i class="fas fa-bell"></i> Notify
+          </button>
+          <button class="btn btn-secondary" onclick="editEvent('evt-003')">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notifications Section -->
+  <section id="notifications-section" class="content-section">
+    <div class="section-header">
+      <h2>Send Notifications</h2>
+    </div>
+
+    <div class="notification-composer">
+      <div class="composer-card">
+        <h3>Compose Notification</h3>
+        
+        <div class="form-group">
+          <label>Notification Type</label>
+          <select id="notificationType" class="form-control">
+            <option>Event Announcement</option>
+            <option>Event Reminder</option>
+            <option>General Update</option>
+            <option>Registration Confirmation</option>
+            <option>Custom Message</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Target Audience</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" value="all"> All Users
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="location"> By Location
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="event"> Event Participants
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="pending"> Pending Registrations
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="locationFilter" style="display: none;">
+          <label>Select Locations</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" value="south-mumbai"> South Mumbai
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="central-mumbai"> Central Mumbai
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="western-suburbs"> Western Suburbs
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="eastern-suburbs"> Eastern Suburbs
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="navi-mumbai"> Navi Mumbai
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" value="thane"> Thane
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" class="form-control" placeholder="Enter notification subject">
+        </div>
+
+        <div class="form-group">
+          <label>Message</label>
+          <textarea class="form-control" rows="6" placeholder="Enter your message here..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Method</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" checked> Email
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" checked> SMS
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" checked> In-App Notification
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Schedule Delivery</label>
+          <div class="schedule-options">
+            <label class="radio-label">
+              <input type="radio" name="schedule" value="now" checked> Send Now
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="schedule" value="later"> Schedule for Later
+            </label>
+          </div>
+          <input type="datetime-local" class="form-control" id="scheduleDateTime" style="display: none;">
+        </div>
+
+        <div class="notification-preview">
+          <h4>Preview</h4>
+          <div class="preview-box">
+            <div class="preview-header">
+              <strong>Subject:</strong> <span id="previewSubject">Your subject will appear here</span>
+            </div>
+            <div class="preview-body">
+              <p id="previewMessage">Your message will appear here...</p>
+            </div>
+            <div class="preview-footer">
+              <small>From: EcoWarriors NGO</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="composer-actions">
+          <button class="btn btn-outline">Save Draft</button>
+          <button class="btn btn-primary" onclick="sendNotification()">
+            <i class="fas fa-paper-plane"></i> Send Notification
+          </button>
+        </div>
+      </div>
+
+      <div class="notification-history">
+        <h3>Recent Notifications</h3>
+        <div class="history-list">
+          <div class="history-item">
+            <div class="history-icon sent">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="history-content">
+              <h4>Event Reminder - Mumbai Monsoon Plantation</h4>
+              <p>Sent to 45 users in South Mumbai</p>
+              <span class="history-time">2 hours ago</span>
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-icon sent">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="history-content">
+              <h4>Registration Confirmation</h4>
+              <p>Sent to 12 new registrations</p>
+              <span class="history-time">1 day ago</span>
+            </div>
+          </div>
+
+          <div class="history-item">
+            <div class="history-icon pending">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="history-content">
+              <h4>Event Announcement - Community Greenery Day</h4>
+              <p>Scheduled for Nov 28, 9:00 AM</p>
+              <span class="history-time">Pending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trees Database Section -->
+  <section id="trees-section" class="content-section">
+    <div class="section-header">
+      <h2>Tree Database</h2>
+      <div class="filter-controls">
+        <input type="text" class="search-input" placeholder="Search by species, location...">
+        <select class="filter-select">
+          <option>All Species</option>
+          <option>Neem</option>
+          <option>Mango</option>
+          <option>Banyan</option>
+          <option>Peepal</option>
+        </select>
+        <button class="btn btn-outline">
+          <i class="fas fa-download"></i> Export Data
+        </button>
+      </div>
+    </div>
+
+    <div class="trees-grid">
+      <div class="tree-card">
+        <div class="tree-image">
+          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=300&fit=crop" alt="Tree">
+          <span class="tree-badge native">Native</span>
+        </div>
+        <div class="tree-info">
+          <h3>Neem Tree</h3>
+          <p class="tree-location"><i class="fas fa-map-marker-alt"></i> South Mumbai</p>
+          <p class="tree-date"><i class="fas fa-calendar"></i> Planted: Oct 15, 2024</p>
+          <p class="tree-planter"><i class="fas fa-user"></i> By: Priya Sharma</p>
+          <div class="tree-health">
+            <span>Health Status:</span>
+            <div class="health-bar">
+              <div class="health-fill good" style="width: 90%"></div>
+            </div>
+            <span class="health-status good">Excellent</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-card">
+        <div class="tree-image">
+          <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&h=300&fit=crop" alt="Tree">
+          <span class="tree-badge native">Native</span>
+        </div>
+        <div class="tree-info">
+          <h3>Mango Tree</h3>
+          <p class="tree-location"><i class="fas fa-map-marker-alt"></i> Western Suburbs</p>
+          <p class="tree-date"><i class="fas fa-calendar"></i> Planted: Oct 10, 2024</p>
+          <p class="tree-planter"><i class="fas fa-user"></i> By: Rahul Verma</p>
+          <div class="tree-health">
+            <span>Health Status:</span>
+            <div class="health-bar">
+              <div class="health-fill good" style="width: 85%"></div>
+            </div>
+            <span class="health-status good">Very Good</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-card">
+        <div class="tree-image">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=300&fit=crop" alt="Tree">
+          <span class="tree-badge native">Native</span>
+        </div>
+        <div class="tree-info">
+          <h3>Banyan Tree</h3>
+          <p class="tree-location"><i class="fas fa-map-marker-alt"></i> Central Mumbai</p>
+          <p class="tree-date"><i class="fas fa-calendar"></i> Planted: Oct 5, 2024</p>
+          <p class="tree-planter"><i class="fas fa-user"></i> By: Anjali Desai</p>
+          <div class="tree-health">
+            <span>Health Status:</span>
+            <div class="health-bar">
+              <div class="health-fill moderate" style="width: 70%"></div>
+            </div>
+            <span class="health-status moderate">Good</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-card">
+        <div class="tree-image">
+          <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&h=300&fit=crop" alt="Tree">
+        </div>
+        <div class="tree-info">
+          <h3>Gulmohar Tree</h3>
+          <p class="tree-location"><i class="fas fa-map-marker-alt"></i> Navi Mumbai</p>
+          <p class="tree-date"><i class="fas fa-calendar"></i> Planted: Sep 28, 2024</p>
+          <p class="tree-planter"><i class="fas fa-user"></i> By: Vikram Singh</p>
+          <div class="tree-health">
+            <span>Health Status:</span>
+            <div class="health-bar">
+              <div class="health-fill good" style="width: 80%"></div>
+            </div>
+            <span class="health-status good">Good</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analytics Section -->
+  <section id="analytics-section" class="content-section">
+    <div class="section-header">
+      <h2>Analytics & Reports</h2>
+      <button class="btn btn-outline">
+        <i class="fas fa-download"></i> Download Report
+      </button>
+    </div>
+
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <h3>Registration Growth</h3>
+        <canvas id="growthChart"></canvas>
+      </div>
+
+      <div class="analytics-card">
+        <h3>Location Distribution</h3>
+        <canvas id="distributionChart"></canvas>
+      </div>
+
+      <div class="analytics-card">
+        <h3>Event Participation Rate</h3>
+        <canvas id="participationChart"></canvas>
+      </div>
+
+      <div class="analytics-card">
+        <h3>Monthly Tree Planting</h3>
+        <canvas id="plantingChart"></canvas>
+      </div>
+    </div>
+
+    <div class="detailed-stats">
+      <h3>Detailed Statistics</h3>
+      <div class="stats-table-container">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Registered Users</th>
+              <th>Trees Planted</th>
+              <th>Events Conducted</th>
+              <th>Avg. Participation</th>
+              <th>Growth Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>South Mumbai</td>
+              <td>45</td>
+              <td>234</td>
+              <td>3</td>
+              <td>78%</td>
+              <td class="positive">+15%</td>
+            </tr>
+            <tr>
+              <td>Western Suburbs</td>
+              <td>38</td>
+              <td>187</td>
+              <td>2</td>
+              <td>82%</td>
+              <td class="positive">+12%</td>
+            </tr>
+            <tr>
+              <td>Central Mumbai</td>
+              <td>52</td>
+              <td>298</td>
+              <td>4</td>
+              <td>85%</td>
+              <td class="positive">+18%</td>
+            </tr>
+            <tr>
+              <td>Eastern Suburbs</td>
+              <td>29</td>
+              <td>156</td>
+              <td>1</td>
+              <td>65%</td>
+              <td class="positive">+8%</td>
+            </tr>
+            <tr>
+              <td>Navi Mumbai</td>
+              <td>34</td>
+              <td>203</td>
+              <td>2</td>
+              <td>73%</td>
+              <td class="positive">+10%</td>
+            </tr>
+            <tr>
+              <td>Thane</td>
+              <td>27</td>
+              <td>142</td>
+              <td>1</td>
+              <td>70%</td>
+              <td class="positive">+7%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Settings Section -->
+  <section id="settings-section" class="content-section">
+    <div class="section-header">
+      <h2>NGO Settings</h2>
+    </div>
+
+    <div class="settings-container">
+      <div class="settings-card">
+        <h3>NGO Profile</h3>
+        <div class="form-group">
+          <label>Organization Name</label>
+          <input type="text" class="form-control" value="EcoWarriors NGO">
+        </div>
+        <div class="form-group">
+          <label>NGO ID</label>
+          <input type="text" class="form-control" value="NGO-2024-001" readonly>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" value="contact@ecowarriors.org">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" class="form-control" value="+91 98765 00000">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" rows="4">EcoWarriors is a Mumbai-based environmental NGO dedicated to urban reforestation and community engagement in tree plantation drives.</textarea>
+        </div>
+        <button class="btn btn-primary">Update Profile</button>
+      </div>
+
+      <div class="settings-card">
+        <h3>Notification Preferences</h3>
+        <div class="preference-item">
+          <label class="checkbox-label">
+            <input type="checkbox" checked>
+            <span>Email notifications for new registrations</span>
+          </label>
+        </div>
+        <div class="preference-item">
+          <label class="checkbox-label">
+            <input type="checkbox" checked>
+            <span>SMS alerts for urgent matters</span>
+          </label>
+        </div>
+        <div class="preference-item">
+          <label class="checkbox-label">
+            <input type="checkbox">
+            <span>Weekly summary reports</span>
+          </label>
+        </div>
+        <div class="preference-item">
+          <label class="checkbox-label">
+            <input type="checkbox" checked>
+            <span>Event reminders</span>
+          </label>
+        </div>
+        <button class="btn btn-primary">Save Preferences</button>
+      </div>
+
+      <div class="settings-card">
+        <h3>Active Locations</h3>
+        <p>Manage the locations where your NGO operates</p>
+        <div class="locations-list">
+          <div class="location-item active">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>South Mumbai</span>
+            <button class="btn-remove">Remove</button>
+          </div>
+          <div class="location-item active">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Western Suburbs</span>
+            <button class="btn-remove">Remove</button>
+          </div>
+          <div class="location-item active">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Central Mumbai</span>
+            <button class="btn-remove">Remove</button>
+          </div>
+        </div>
+        <button class="btn btn-outline" onclick="openModal('addLocationModal')">
+          <i class="fas fa-plus"></i> Add Location
+        </button>
+      </div>
+
+      <div class="settings-card">
+        <h3>Security</h3>
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input type="password" class="form-control">
+        </div>
+        <button class="btn btn-primary">Change Password</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Modals -->
+<!-- User Details Modal -->
+<div class="modal" id="userDetailsModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>User Details</h3>
+      <button class="modal-close" onclick="closeModal('userDetailsModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="user-details-content">
+        <div class="detail-row">
+          <label>User ID:</label>
+          <span id="modalUserId">#USR-001</span>
+        </div>
+        <div class="detail-row">
+          <label>Full Name:</label>
+          <span id="modalUserName">Priya Sharma</span>
+        </div>
+        <div class="detail-row">
+          <label>Email:</label>
+          <span id="modalUserEmail">priya.sharma@email.com</span>
+        </div>
+        <div class="detail-row">
+          <label>Phone:</label>
+          <span id="modalUserPhone">+91 98765 43210</span>
+        </div>
+        <div class="detail-row">
+          <label>Preferred Location:</label>
+          <span id="modalUserLocation">South Mumbai</span>
+        </div>
+        <div class="detail-row">
+          <label>Registration Date:</label>
+          <span id="modalUserDate">October 25, 2024</span>
+        </div>
+        <div class="detail-row">
+          <label>Status:</label>
+          <span id="modalUserStatus" class="status-badge pending">Pending</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="openNotifyModal('USR-001')">
+          <i class="fas fa-paper-plane"></i> Send Notification
+        </button>
+        <button class="btn btn-secondary" onclick="markAsContacted('USR-001')">
+          <i class="fas fa-check"></i> Mark as Contacted
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notify User Modal -->
+<div class="modal" id="notifyUserModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Send Notification to User</h3>
+      <button class="modal-close" onclick="closeModal('notifyUserModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="notifyUserForm">
+        <div class="form-group">
+          <label>Recipient:</label>
+          <input type="text" class="form-control" id="notifyRecipient" readonly>
+        </div>
+        <div class="form-group">
+          <label>Subject:</label>
+          <input type="text" class="form-control" placeholder="Enter subject">
+        </div>
+        <div class="form-group">
+          <label>Message:</label>
+          <textarea class="form-control" rows="5" placeholder="Enter your message..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Include Event Details:</label>
+          <select class="form-control">
+            <option>None</option>
+            <option>Mumbai Monsoon Plantation - Nov 15</option>
+            <option>Corporate Green Initiative - Nov 22</option>
+            <option>Community Greenery Day - Nov 30</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i> Send Notification
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Create Event Modal -->
+<div class="modal" id="createEventModal">
+  <div class="modal-content large">
+    <div class="modal-header">
+      <h3>Create New Event</h3>
+      <button class="modal-close" onclick="closeModal('createEventModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="createEventForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Event Title:</label>
+            <input type="text" class="form-control" placeholder="Enter event title">
+          </div>
+          <div class="form-group">
+            <label>Event Type:</label>
+            <select class="form-control">
+              <option>Plantation Drive</option>
+              <option>Community Event</option>
+              <option>Corporate Event</option>
+              <option>Educational Workshop</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date:</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Time:</label>
+            <input type="time" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Location:</label>
+          <select class="form-control">
+            <option>South Mumbai</option>
+            <option>Central Mumbai</option>
+            <option>Western Suburbs</option>
+            <option>Eastern Suburbs</option>
+            <option>Navi Mumbai</option>
+            <option>Thane</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Specific Venue:</label>
+          <input type="text" class="form-control" placeholder="Enter venue details">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Target Trees:</label>
+            <input type="number" class="form-control" placeholder="Number of trees">
+          </div>
+          <div class="form-group">
+            <label>Max Participants:</label>
+            <input type="number" class="form-control" placeholder="Maximum attendees">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description:</label>
+          <textarea class="form-control" rows="4" placeholder="Enter event description..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="closeModal('createEventModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create Event
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Add Location Modal -->
+<div class="modal" id="addLocationModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Add New Location</h3>
+      <button class="modal-close" onclick="closeModal('addLocationModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="addLocationForm">
+        <div class="form-group">
+          <label>Location Name:</label>
+          <input type="text" class="form-control" placeholder="Enter location name">
+        </div>
+        <div class="form-group">
+          <label>Area:</label>
+          <select class="form-control">
+            <option>South Mumbai</option>
+            <option>Central Mumbai</option>
+            <option>Western Suburbs</option>
+            <option>Eastern Suburbs</option>
+            <option>Navi Mumbai</option>
+            <option>Thane</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description:</label>
+          <textarea class="form-control" rows="3" placeholder="Enter location description..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Add Location
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Event Details Modal -->
+<div id="eventDetailsModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('eventDetailsModal')">&times;</span>
+    <h2 id="modalEventName">Event Name</h2>
+    <p><strong>Date:</strong> <span id="modalEventDate"></span></p>
+    <p><strong>Time:</strong> <span id="modalEventTime"></span></p>
+    <p><strong>Location:</strong> <span id="modalEventLocation"></span></p>
+    <p><strong>Volunteers Registered:</strong> <span id="modalEventVolunteers"></span></p>
+    <p><strong>Description:</strong></p>
+    <p id="modalEventDescription"></p>
+  </div>
+</div>
+<!-- Location Details Modal -->
+<div id="locationDetailsModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('locationDetailsModal')">&times;</span>
+    <h2 id="modalLocationName">Location Name</h2>
+    <p><strong>Status:</strong> <span id="modalLocationStatus"></span></p>
+    <p><strong>Users:</strong> <span id="modalLocationUsers"></span></p>
+    <p><strong>Trees Planted:</strong> <span id="modalLocationTrees"></span></p>
+    <p><strong>Events Conducted:</strong> <span id="modalLocationEvents"></span></p>
+    <div id="modalLocationMap" class="mini-map" style="height:250px;margin-top:10px;"></div>
+  </div>
+</div>
+
+
+<script src="admin-script.js"></script>
+</body>
+</html>

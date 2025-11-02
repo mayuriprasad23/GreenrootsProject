@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenLeaf - Login & Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #68b684 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Elements */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #68b684;
+            border-radius: 0 100% 0 100%;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .leaf:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .leaf:nth-child(2) {
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .leaf:nth-child(3) {
+            left: 30%;
+            animation-delay: 2s;
+        }
+
+        .leaf:nth-child(4) {
+            left: 40%;
+            animation-delay: 3s;
+        }
+
+        .leaf:nth-child(5) {
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        .leaf:nth-child(6) {
+            left: 60%;
+            animation-delay: 0.5s;
+        }
+
+        .leaf:nth-child(7) {
+            left: 70%;
+            animation-delay: 1.5s;
+        }
+
+        .leaf:nth-child(8) {
+            left: 80%;
+            animation-delay: 2.5s;
+        }
+
+        .leaf:nth-child(9) {
+            left: 90%;
+            animation-delay: 3.5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 400px;
+            min-height: 500px;
+            position: relative;
+            z-index: 1;
+            transform: translateY(0);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2d5016, #4a7c59);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q50,10 80,20 Q90,50 80,80 Q50,90 20,80 Q10,50 20,20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Form Container */
+        .form-container {
+            position: relative;
+            height: 520px;
+            overflow: hidden;
+        }
+
+        .form {
+            position: absolute;
+            width: 100%;
+            padding: 40px;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .login-form {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .signup-form {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .container.signup-active .login-form {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        .container.signup-active .signup-form {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2d5016;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4a7c59;
+            box-shadow: 0 0 20px rgba(74, 124, 89, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .form-group input:focus+label,
+        .form-group input:not(:placeholder-shown)+label {
+            color: #4a7c59;
+            transform: translateY(-5px);
+        }
+
+        /* Icon Inputs */
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4a7c59;
+            transition: all 0.3s;
+        }
+
+        .input-with-icon input:focus~i {
+            color: #2d5016;
+            animation: pulse 0.6s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translateY(-50%) scale(1);
+            }
+
+            50% {
+                transform: translateY(-50%) scale(1.2);
+            }
+
+            100% {
+                transform: translateY(-50%) scale(1);
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a7c59, #68b684);
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 124, 89, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4a7c59;
+            border: 2px solid #4a7c59;
+        }
+
+        .btn-secondary:hover {
+            background: #4a7c59;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Toggle Text */
+        .toggle-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .toggle-link {
+            color: #4a7c59;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .toggle-link:hover {
+            color: #2d5016;
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: linear-gradient(135deg, #4a7c59, #68b684);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                margin: 20px;
+            }
+
+            .form {
+                padding: 30px 25px;
+            }
+        }
+
+        /* Password Strength Indicator */
+        .password-strength {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .strength-weak {
+            background: #ff4757;
+            width: 33%;
+        }
+
+        .strength-medium {
+            background: #ffa502;
+            width: 66%;
+        }
+
+        .strength-strong {
+            background: #4a7c59;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+    </div>
+
+    <div class="container" id="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">GreenRoots</div>
+            <div class="subtitle">Welcome to Nature's Portal</div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Login Form -->
+            <div class="form login-form">
+                <div class="success-message" id="loginSuccess">
+                    <i class="fas fa-check-circle"></i> Welcome back! Login successful.
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <label for="loginEmail">Email Address</label>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <label for="loginPassword">Password</label>
+                </div>
+
+                <button class="btn btn-primary" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+
+                <div class="toggle-text">
+                    Don't have an account?
+                    <a href="#" class="toggle-link" onclick="toggleForm()">Create Account</a>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="form signup-form">
+                <div class="success-message" id="signupSuccess">
+                    <i class="fas fa-check-circle"></i> Account created successfully! Welcome to GreenLeaf.
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <input type="text" id="fullName" placeholder="Enter your full name" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <label for="fullName">Full Name</label>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <label for="signupEmail">Email Address</label>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <input type="password" id="signupPassword" placeholder="Create a password" required
+                            onkeyup="checkPasswordStrength()">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <label for="signupPassword">Password</label>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-with-icon">
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <label for="confirmPassword">Confirm Password</label>
+                </div>
+
+                <button class="btn btn-primary" onclick="handleSignup()">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+
+                <div class="toggle-text">
+                    Already have an account?
+                    <a href="#" class="toggle-link" onclick="toggleForm()">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and signup forms
+        function toggleForm() {
+            const container = document.getElementById('container');
+            container.classList.toggle('signup-active');
+
+            // Clear all inputs
+            document.querySelectorAll('input').forEach(input => {
+                input.value = '';
+                input.classList.remove('shake');
+            });
+
+            // Hide success messages
+            document.getElementById('loginSuccess').style.display = 'none';
+            document.getElementById('signupSuccess').style.display = 'none';
+        }
+        // Handle login
+        // function handleLogin() {
+        //     const email = document.getElementById('loginEmail').value;
+        //     const password = document.getElementById('loginPassword').value;
+
+        //     if (!email || !password) {
+        //         shakeInputs(['loginEmail', 'loginPassword']);
+        //         return;
+        //     }
+
+        //     if (!isValidEmail(email)) {
+        //         shakeInputs(['loginEmail']);
+        //         return;
+        //     }
+
+        //     // Actual backend login API call
+        //     const formData = new FormData();
+        //     formData.append("email", email);
+        //     formData.append("password", password);
+
+        //     fetch("http://localhost:8080/api/auth/login", {
+        //         method: "POST",
+        //         body: formData
+        //     })
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             if (data && data.email) {
+        //                 localStorage.setItem("userEmail", data.email);
+        //                 document.getElementById('loginSuccess').style.display = 'block';
+
+        //                 setTimeout(() => {
+        //                     window.location.href = "main.html";
+        //                 }, 1000);
+        //             } else {
+        //                 alert("Invalid email or password");
+        //             }
+        //         })
+        //         .catch(err => {
+        //             alert("Server error, try again");
+        //             console.error(err);
+        //         });
+
+        // }
+//         function handleLogin() {
+//     const email = document.getElementById('loginEmail').value;
+//     const password = document.getElementById('loginPassword').value;
+
+//     if (!email || !password) {
+//         shakeInputs(['loginEmail', 'loginPassword']);
+//         return;
+//     }
+
+//     const data = { email, password };
+
+//     fetch("http://localhost:8080/api/auth/login", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(data)
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//         if (data && data.email) {
+//             localStorage.setItem("userEmail", data.email);
+//             document.getElementById('loginSuccess').style.display = 'block';
+
+//             setTimeout(() => {
+//                 window.location.href = "main.html";
+//             }, 1000);
+//         } else {
+//             alert("Invalid email or password");
+//         }
+//     })
+//     .catch(err => {
+//         alert("Server error");
+//         console.error(err);
+//     });
+// }
+function handleLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+
+    if (!email || !password) {
+        shakeInputs(['loginEmail', 'loginPassword']);
+        return;
+    }
+
+    const data = { email, password };
+
+    fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(async res => {
+        if (!res.ok) {
+            throw new Error("Invalid credentials");
+        }
+        return res.json();
+    })
+    .then(data => {
+        document.getElementById('loginSuccess').style.display = 'block';
+        localStorage.setItem("userEmail", data.email);
+
+        setTimeout(() => {
+            window.location.href = "main.html";
+        }, 1000);
+    })
+    .catch(() => {
+        alert("❌ Invalid email or password");
+        shakeInputs(['loginEmail', 'loginPassword']);
+    });
+}
+
+
+
+        // Handle signup
+        // function handleSignup() {
+        //     const fullName = document.getElementById('fullName').value;
+        //     const email = document.getElementById('signupEmail').value;
+        //     const password = document.getElementById('signupPassword').value;
+        //     const confirmPassword = document.getElementById('confirmPassword').value;
+
+        //     const errors = [];
+
+        //     if (!fullName.trim()) errors.push('fullName');
+        //     if (!email || !isValidEmail(email)) errors.push('signupEmail');
+        //     if (!password || password.length < 6) errors.push('signupPassword');
+        //     if (password !== confirmPassword) errors.push('confirmPassword');
+
+        //     if (errors.length > 0) {
+        //         shakeInputs(errors);
+        //         return;
+        //     fetch("http://localhost:8080/api/auth/register", {
+        //         method: "POST",
+        //         body: formData
+        //     })
+        //     .then(res => res.text())
+        //     .then(msg => {
+        //         alert("Account created successfully!");
+        //         window.location.href = "index.html"; // back to login
+        //     })
+        //     .catch(err => {
+        //         alert("Signup failed!");
+        //         console.error(err);
+        //     });
+        //     }
+
+        //     document.getElementById('signupSuccess').style.display = 'block';
+
+        //     console.log('Signup attempt:', { fullName, email, password });
+
+        //     // Redirect to main page after 1.5 seconds
+        //     setTimeout(() => {
+        //         window.location.href = 'main.html';  
+        //     }, 1500);
+        // }
+        function handleSignup() {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            const errors = [];
+
+            if (!fullName.trim()) errors.push('fullName');
+            if (!email || !isValidEmail(email)) errors.push('signupEmail');
+            if (!password || password.length < 6) errors.push('signupPassword');
+            if (password !== confirmPassword) errors.push('confirmPassword');
+
+            if (errors.length > 0) {
+                shakeInputs(errors);
+                return;
+            }
+
+            // ✅ Send to backend
+            const data = {
+                name: fullName,
+                email: email,
+                password: password
+            };
+
+            fetch("http://localhost:8080/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.text())
+                .then(msg => {
+                    document.getElementById('signupSuccess').style.display = 'block';
+
+                    setTimeout(() => {
+                        window.location.href = "index.html"; // back to login page
+                    }, 1500);
+                })
+                .catch(err => {
+                    alert("Signup failed!");
+                    console.error(err);
+                });
+        }
+
+        // Utility functions
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function shakeInputs(inputIds) {
+            inputIds.forEach(id => {
+                const input = document.getElementById(id);
+                input.classList.add('shake');
+                setTimeout(() => input.classList.remove('shake'), 500);
+            });
+        }
+
+        // Password strength checker
+        function checkPasswordStrength() {
+            const password = document.getElementById('signupPassword').value;
+            const strengthBar = document.getElementById('strengthBar');
+
+            let strength = 0;
+
+            // Length check
+            if (password.length >= 6) strength++;
+            if (password.length >= 10) strength++;
+
+            // Character variety checks
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+            // Update strength bar
+            strengthBar.className = 'strength-bar';
+
+            if (strength <= 2) {
+                strengthBar.classList.add('strength-weak');
+            } else if (strength <= 4) {
+                strengthBar.classList.add('strength-medium');
+            } else {
+                strengthBar.classList.add('strength-strong');
+            }
+        }
+
+        // Add floating animation to inputs on focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+
+            input.addEventListener('blur', function () {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate form elements on load
+            const formElements = document.querySelectorAll('.form-group, .btn');
+            formElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+                element.classList.add('fade-in');
+            });
+        });
+
+        // Easter egg: Konami code for special animation
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+
+        document.addEventListener('keydown', function (e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (konamiCode.join('') === konamiSequence.join('')) {
+                document.body.style.animation = 'rainbow 2s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 4000);
+            }
+        });
+
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

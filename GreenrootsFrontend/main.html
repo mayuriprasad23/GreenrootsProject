@@ -1,0 +1,944 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GreenRoots - The Green Initiative</title>
+  <link rel="stylesheet" href="enhanced-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+<body>
+
+<!-- Loading Animation -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-content">
+    <div class="tree-animation">
+      <div class="trunk"></div>
+      <div class="leaves"></div>
+    </div>
+    <h2>Growing Green...</h2>
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Action Button -->
+<div class="fab" id="plantTreeFab">
+  <i class="fas fa-seedling"></i>
+  <span class="fab-tooltip">Plant a Tree</span>
+</div>
+
+<header class="header">
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-top">
+        <div class="logo" data-aos="fade-right">
+          <i class="fas fa-leaf logo-icon"></i>
+          <span>TheGreenRoots</span>
+        </div>
+        <div class="nav-right">
+          <div class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+          </div>
+          <div class="profile-section">
+            <i class="fa-solid fa-user-circle profile-icon"></i>
+          </div>
+        </div>
+      </div>
+      <div class="nav-links" data-aos="fade-left">
+        <a href="#mission" class="nav-link">
+          <i class="fas fa-bullseye"></i>
+          <span>Mission</span>
+        </a>
+        <a href="#plant-tree" class="nav-link">
+          <i class="fas fa-seedling"></i>
+          <span>Plant A Tree</span>
+        </a>
+        <a href="#events" class="nav-link">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Events</span>
+        </a>
+        <a href="#map" class="nav-link">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Tree Map</span>
+        </a>
+        <a href="#pledge" class="nav-link">
+          <i class="fas fa-handshake"></i>
+          <span>Pledge</span>
+        </a>
+        <a href="#contact" class="nav-link">
+          <i class="fas fa-envelope"></i>
+          <span>Contact</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Animated Background -->
+<div class="animated-bg">
+  <div class="floating-leaf leaf-1"></div>
+  <div class="floating-leaf leaf-2"></div>
+  <div class="floating-leaf leaf-3"></div>
+  <div class="floating-leaf leaf-4"></div>
+</div>
+
+<section class="hero" data-aos="fade-up">
+  <div class="hero-content">
+    <div class="quote-container">
+      <h1 class="hero-title">
+        <span class="quote-mark">"</span>
+        <span class="typewriter" id="typewriter"></span>
+        <span class="quote-mark">"</span>
+      </h1>
+
+    </div>
+    <p class="hero-description">
+      Join our community drives to make our cities greener, cooler, and healthier for everyone.
+    </p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary ripple-effect" onclick="scrollToSection('plant-tree')">
+        <i class="fas fa-seedling"></i>
+        Plant Now
+      </button>
+      <button class="btn btn-secondary ripple-effect" onclick="scrollToSection('map')">
+        <i class="fas fa-map"></i>
+        View Map
+      </button>
+    </div>
+  </div>
+  <div class="hero-visual" data-aos="fade-left" data-aos-delay="300">
+    <div class="tree-illustration">
+      <div class="tree-trunk"></div>
+      <div class="tree-crown"></div>
+      <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <!-- Stats Section -->
+  <section class="stats-section" data-aos="fade-up">
+    <div class="stats-grid">
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="stat-icon">
+          <i class="fas fa-tree"></i>
+        </div>
+        <h3 class="stat-number" data-count="24680">0</h3>
+        <p class="stat-label">Trees Planted</p>
+        <div class="stat-progress">
+          <div class="stat-bar" data-width="85%"></div>
+        </div>
+      </div>
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="stat-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3 class="stat-number" data-count="3142">0</h3>
+        <p class="stat-label">Community Members</p>
+        <div class="stat-progress">
+          <div class="stat-bar" data-width="72%"></div>
+        </div>
+      </div>
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+        <div class="stat-icon">
+          <i class="fas fa-city"></i>
+        </div>
+        <h3 class="stat-number" data-count="18">0</h3>
+        <p class="stat-label">Cities Covered</p>
+        <div class="stat-progress">
+          <div class="stat-bar" data-width="60%"></div>
+        </div>
+      </div>
+      <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+        <div class="stat-icon">
+          <i class="fas fa-globe-asia"></i>
+        </div>
+        <h3 class="stat-number" data-count="1250">0</h3>
+        <p class="stat-label">CO₂ Offset (kg)</p>
+        <div class="stat-progress">
+          <div class="stat-bar" data-width="90%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+ <section id="mission" class="mission-section" data-aos="fade-up">
+  <div class="section-header">
+    <h2 class="section-title">Our Mission</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="mission-content">
+    <!-- Mission Image -->
+ <div class="mission-image" data-aos="fade-right">
+  <img src="https://www.ugaoo.com/cdn/shop/articles/shutterstock_417312760.jpg?v=1661869375" alt="Tree Planting Mission" />
+  <div class="image-overlay">
+    <div class="overlay-text">
+      <i class="fas fa-seedling"></i>
+      <p>Growing Together</p>
+    </div>
+  </div>
+</div>
+    
+
+   <div class="features-grid">
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-tree"></i>
+    </div>
+    <span>Track planted trees with GPS precision</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-seedling"></i>
+    </div>
+    <span>Promote community environmental involvement</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-leaf"></i>
+    </div>
+    <span>Monitor long-term plantation impact</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-spa"></i>
+    </div>
+    <span>Real-time tree health monitoring</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-users"></i>
+    </div>
+    <span>Engage local communities in conservation</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-graduation-cap"></i>
+    </div>
+    <span>Educate youth about environmental sustainability</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-tree"></i>
+    </div>
+    <span>Prioritize native species for ecological balance</span>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon-circle">
+      <i class="fas fa-recycle"></i>
+    </div>
+    <span>Promote ecosystem biodiversity and restoration</span>
+  </div>
+</div>
+  </section>
+  
+
+  <!-- Mumbai Tree Map Section -->
+  <section id="map" class="map-section" data-aos="fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Mumbai Tree Plantation Map</h2>
+      <div class="section-divider"></div>
+      <p class="section-description">Explore where trees have been planted across Mumbai and add your contribution!</p>
+    </div>
+    
+    <div class="map-controls" data-aos="fade-up" data-aos-delay="100">
+      <div class="control-group">
+        <button class="control-btn active" data-filter="all">
+          <i class="fas fa-tree"></i>
+          All Trees
+        </button>
+        <button class="control-btn" data-filter="recent">
+          <i class="fas fa-clock"></i>
+          Recent Plantings
+        </button>
+        <button class="control-btn" data-filter="native">
+          <i class="fas fa-leaf"></i>
+          Native Species
+        </button>
+      </div>
+      <div class="map-stats">
+        <div class="map-stat">
+          <span class="stat-value" id="totalTrees">156</span>
+          <span class="stat-label">Total Trees</span>
+        </div>
+        <div class="map-stat">
+          <span class="stat-value" id="activeAreas">12</span>
+          <span class="stat-label">Active Areas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-container" data-aos="zoom-in" data-aos-delay="200">
+      <div id="mumbai-map" class="interactive-map"></div>
+      <div class="map-legend">
+        <h4>Legend</h4>
+        <div class="legend-item">
+          <div class="legend-marker new-tree"></div>
+          <span>Recently Planted (< 30 days)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-marker mature-tree"></div>
+          <span>Established Trees (> 1 year)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-marker native-tree"></div>
+          <span>Native Species</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Tree Modal -->
+    <div class="modal" id="addTreeModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Tree</h3>
+          <button class="modal-close" onclick="closeModal('addTreeModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="addTreeForm">
+            <div class="form-group">
+              <label>Tree Species</label>
+              <select id="treeSpecies" required>
+                <option value="">Select species...</option>
+                <option value="Mango">Mango (Native)</option>
+                <option value="Neem">Neem (Native)</option>
+                <option value="Banyan">Banyan (Native)</option>
+                <option value="Gulmohar">Gulmohar</option>
+                <option value="Coconut">Coconut Palm</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Planter Name</label>
+              <input type="text" id="planterName" required>
+            </div>
+            <div class="form-group">
+              <label>Location Description</label>
+              <input type="text" id="locationDesc" placeholder="e.g., Near Metro Station">
+            </div>
+            <div class="form-group">
+              <label>Coordinates</label>
+              <div class="coord-inputs">
+                <input type="number" id="latitude" step="any" placeholder="Latitude" readonly>
+                <input type="number" id="longitude" step="any" placeholder="Longitude" readonly>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-plus"></i>
+              Add Tree
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- Plant Tree Section -->
+  <section id="plant-tree" class="plant-section" data-aos="fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Plant a Tree</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="plant-options">
+      <div class="plant-card" data-aos="flip-left" data-aos-delay="100">
+        <div class="plant-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h3>Individual Planting</h3>
+        <p>Plant a single tree and track its growth</p>
+        <button class="btn btn-outline ripple-effect" onclick="openModal('individualPlantModal')">Choose Location</button>
+      </div>
+      <div class="plant-card" data-aos="flip-left" data-aos-delay="200">
+        <div class="plant-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Community Drive</h3>
+        <p>Join or organize community plantation events</p>
+        <button class="btn btn-outline ripple-effect" onclick="openModal('communityDriveModal')">Join Event</button>
+      </div>
+      <div class="plant-card" data-aos="flip-left" data-aos-delay="300">
+        <div class="plant-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3>Corporate Partnership</h3>
+        <p>Partner with us for large-scale initiatives</p>
+        <button class="btn btn-outline ripple-effect" onclick="openModal('corporatePartnershipModal')">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Individual Planting Modal -->
+   <div class="modal" id="individualPlantModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-seedling"></i> Individual Tree Planting</h3>
+        <button class="modal-close" onclick="closeModal('individualPlantModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+    
+  <form id="individualPlantForm">
+    <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" id="individualName" class="form-control" placeholder="Your Name">
+    </div>
+
+    <div class="form-group">
+        <label>Contact Number</label>
+        <input type="text" id="individualContact" class="form-control" placeholder="Contact Number">
+    </div>
+
+    <div class="form-group">
+        <label>Tree Species</label>
+        <select id="individualSpecies" class="form-control">
+            <option value="">Select species...</option>
+            <option value="Mango">Mango</option>
+            <option value="Neem">Neem</option>
+            <option value="Banyan">Banyan</option>
+            <option value="Peepal">Peepal</option>
+            <option value="Gulmohar">Gulmohar</option>
+            <option value="Coconut">Coconut</option>
+            <option value="Ashoka">Ashoka</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Preferred Location</label>
+        <select id="individualPreferredLocation" class="form-control">
+            <option value="">Select location...</option>
+            <option value="South Mumbai">South Mumbai</option>
+            <option value="Central Mumbai">Central Mumbai</option>
+            <option value="Western Suburbs">Western Suburbs</option>
+            <option value="Eastern Suburbs">Eastern Suburbs</option>
+            <option value="Navi Mumbai">Navi Mumbai</option>
+            <option value="Thane">Thane</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Specific Location</label>
+        <input type="text" id="individualSpecificLocation" class="form-control" placeholder="Specific Location (optional)">
+    </div>
+
+    <div class="form-group">
+        <label>Preferred Planting Date</label>
+        <input type="date" id="individualDate" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea id="individualNotes" class="form-control" placeholder="Notes (optional)"></textarea>
+    </div>
+
+    <button type="button" onclick="plantTree()" class="btn btn-success btn-lg">Submit Request</button>
+</form>
+</div>
+</div>
+</div>
+
+  <!-- Community Drive Modal -->
+  <div class="modal" id="communityDriveModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-users"></i> Community Plantation Drive</h3>
+        <button class="modal-close" onclick="closeModal('communityDriveModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="communityForm">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="commName" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="commEmail" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="commPhone" placeholder="Your phone number" required>
+          </div>
+          <div class="form-group">
+            <label>Organization/Group Name (Optional)</label>
+            <input type="text" id="commOrg" placeholder="Your organization name">
+          </div>
+          <div class="form-group">
+            <label>I Want To</label>
+            <select id="commIwanto" required>
+              <option value="">Select option...</option>
+              <option value="join">Join an Existing Drive</option>
+              <option value="organize">Organize a New Drive</option>
+            </select>
+          </div>
+          <div class="form-group" id="communityLocationGroup">
+            <label>Preferred Area</label>
+            <select id="commArea" required>
+              <option value="">Select area...</option>
+              <option value="south-mumbai">South Mumbai</option>
+              <option value="central-mumbai">Central Mumbai</option>
+              <option value="western-suburbs">Western Suburbs</option>
+              <option value="eastern-suburbs">Eastern Suburbs</option>
+              <option value="navi-mumbai">Navi Mumbai</option>
+              <option value="thane">Thane</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message (Optional)</label>
+            <textarea id="commMsg" rows="3" placeholder="Tell us more about your interest..."></textarea>
+          </div>
+          <button type="button" class="btn btn-primary btn-large ripple-effect"
+          onclick="submitCommunityForm()">
+          <i class="fas fa-check"></i> Submit Request
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Corporate Partnership Modal -->
+  <div class="modal" id="corporatePartnershipModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i class="fas fa-building"></i> Corporate Partnership Program</h3>
+        <button class="modal-close" onclick="closeModal('corporatePartnershipModal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="corporatePartnershipForm">
+          <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" id="corporateName" placeholder="Your company name" required>
+          </div>
+          <div class="form-group">
+            <label>Contact Person</label>
+            <input type="text" id="corporateContact" placeholder="Full name" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="corporateEmail" placeholder="corporate@company.com" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" id="corporatePhone" placeholder="Contact number" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Company Size</label>
+            <select id="corporateSize" required>
+              <option value="">Select size...</option>
+              <option value="small">Small (1-50 employees)</option>
+              <option value="medium">Medium (51-200 employees)</option>
+              <option value="large">Large (201-1000 employees)</option>
+              <option value="enterprise">Enterprise (1000+ employees)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Partnership Interest</label>
+            <select id="corporateInterest" required>
+              <option value="">Select interest...</option>
+              <option value="csr">CSR Initiative</option>
+              <option value="team-building">Team Building Event</option>
+              <option value="sponsorship">Sponsorship Program</option>
+              <option value="long-term">Long-term Partnership</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Expected Number of Trees</label>
+            <input type="number" id="corporateTreeCount" min="50" placeholder="Minimum 50 trees" required>
+          </div>
+          <div class="form-group">
+            <label>Preferred Timeline</label>
+            <select id="corporateTimeline" required>
+              <option value="">Select timeline...</option>
+              <option value="immediate">Within 1 month</option>
+              <option value="short">1-3 months</option>
+              <option value="medium">3-6 months</option>
+              <option value="long">6+ months</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Additional Details</label>
+            <textarea id="corporateDetails" rows="4" placeholder="Tell us about your goals and expectations..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-large ripple-effect">
+            <i class="fas fa-paper-plane"></i>
+            Request Partnership
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events Section -->
+  <section id="events" class="events-section" data-aos="fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Upcoming Events</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="events-grid">
+      <div class="event-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="event-date">
+          <span class="day">15</span>
+          <span class="month">NOV</span>
+        </div>
+        <div class="event-content">
+          <h3>Mumbai Monsoon Plantation</h3>
+          <p class="event-location">
+            <i class="fas fa-map-marker-alt"></i>
+            Sanjay Gandhi National Park
+          </p>
+          <p class="event-description">Join us for a massive plantation drive in the heart of Mumbai's green lung.</p>
+          <div class="event-participants">
+            <div class="participant-avatars">
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+              <div class="avatar more">+25</div>
+            </div>
+          </div>
+        </div>
+<button class="btn btn-small btn-primary ripple-effect" onclick="openEventRegistration('mumbai-monsoon')">
+  <i class="fas fa-user-plus"></i> Register Now
+</button>      </div>
+      
+      <div class="event-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="event-date">
+          <span class="day">22</span>
+          <span class="month">NOV</span>
+        </div>
+        <div class="event-content">
+          <h3>Corporate Green Initiative</h3>
+          <p class="event-location">
+            <i class="fas fa-map-marker-alt"></i>
+            BKC Business District
+          </p>
+          <p class="event-description">Corporate teams unite for urban forest creation in Mumbai's business hub.</p>
+          <div class="event-participants">
+            <div class="participant-avatars">
+              <div class="avatar"></div>
+              <div class="avatar"></div>
+              <div class="avatar more">+15</div>
+            </div>
+          </div>
+        </div>
+        
+<button class="btn btn-small btn-primary ripple-effect" onclick="openEventRegistration('corporate-green')">
+  <i class="fas fa-user-plus"></i> Register Now
+</button>
+      </div>
+    <!-- Event Registration Modal -->
+<div class="modal" id="eventRegistrationModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><i class="fas fa-calendar-check"></i> <span id="eventTitle">Event Registration</span></h3>
+      <button class="modal-close" onclick="closeModal('eventRegistrationModal')">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="event-info-banner" id="eventInfoBanner"></div>
+      <form id="eventRegistrationForm">
+        <input type="hidden" id="eventId" name="eventId">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="eventName" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="eventEmail" placeholder="your@email.com" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="eventPhone" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="eventAge" min="10" max="100" placeholder="Your age">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Number of Participants</label>
+          <select id="eventParticipants" required>
+            <option value="">Select participants...</option>
+            <option value="1">Just me (1 person)</option>
+            <option value="2">2 people</option>
+            <option value="3-5">3-5 people</option>
+            <option value="6-10">6-10 people</option>
+            <option value="10+">More than 10 people</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>T-Shirt Size (Optional)</label>
+          <select id="eventTshirt">
+            <option value="">Select size...</option>
+            <option value="S">Small (S)</option>
+            <option value="M">Medium (M)</option>
+            <option value="L">Large (L)</option>
+            <option value="XL">Extra Large (XL)</option>
+            <option value="XXL">2XL</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>How did you hear about this event?</label>
+          <select id="eventSource">
+            <option value="">Select option...</option>
+            <option value="website">Website</option>
+            <option value="social-media">Social Media</option>
+            <option value="friend">Friend/Family</option>
+            <option value="email">Email Newsletter</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Special Requirements / Message (Optional)</label>
+          <textarea id="eventMessage" rows="3" placeholder="Any dietary restrictions, accessibility needs, or questions..."></textarea>
+        </div>
+        
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="eventTerms" required>
+            <span>I agree to the terms and conditions and understand the event guidelines *</span>
+          </label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-large ripple-effect">
+          <i class="fas fa-check-circle"></i> Confirm Registration
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <!-- Pledge Section -->
+  <section id="pledge" class="pledge-section" data-aos="fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Make Your Pledge</h2>
+      <div class="section-divider"></div>
+      <p class="section-description">Commit to making Mumbai greener, one tree at a time</p>
+    </div>
+    <div class="pledge-container">
+      <form class="pledge-form" data-aos="fade-right">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pledgeName">Full Name</label>
+            <input type="text" id="pledgeName" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <label for="pledgeEmail">Email Address</label>
+            <input type="email" id="pledgeEmail" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="treeCount">Number of Trees</label>
+            <input type="number" id="treeCount" min="1" placeholder="How many trees?" required>
+          </div>
+          <div class="form-group">
+            <label for="pledgeArea">Preferred Area</label>
+            <select id="pledgeArea" required>
+              <option value="">Select area...</option>
+              <option value="south-mumbai">South Mumbai</option>
+              <option value="central-mumbai">Central Mumbai</option>
+              <option value="western-suburbs">Western Suburbs</option>
+              <option value="eastern-suburbs">Eastern Suburbs</option>
+              <option value="navi-mumbai">Navi Mumbai</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pledgeMessage">Message (Optional)</label>
+          <textarea id="pledgeMessage" rows="4" placeholder="Share your motivation..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-large ripple-effect">
+          <i class="fas fa-handshake"></i>
+          Make Pledge
+        </button>
+      </form>
+      <div class="pledge-visual" data-aos="fade-left">
+        <div class="pledge-impact">
+          <h3>Your Impact</h3>
+          <div class="impact-metrics">
+            <div class="metric">
+              <i class="fas fa-leaf"></i>
+              <span class="metric-value">25kg</span>
+              <span class="metric-label">CO₂ absorbed/year per tree</span>
+            </div>
+            <div class="metric">
+              <i class="fas fa-tint"></i>
+              <span class="metric-value">150L</span>
+              <span class="metric-label">Water filtered/day per tree</span>
+            </div>
+            <div class="metric">
+              <i class="fas fa-wind"></i>
+              <span class="metric-value">2°C</span>
+              <span class="metric-label">Temperature reduction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section" data-aos="fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info" data-aos="fade-right">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Email Us</h4>
+            <p>hello@greenroots.org</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Call Us</h4>
+            <p>+91-98765-43210</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Visit Us</h4>
+            <p>Mumbai, Maharashtra</p>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form" data-aos="fade-left">
+        <form id="contactForm">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Subject" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary ripple-effect">
+            <i class="fas fa-paper-plane"></i>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <div class="footer-logo">
+        <i class="fas fa-leaf"></i>
+        <span>TheGreenRoots</span>
+      </div>
+      <p>Growing a greener tomorrow, one tree at a time.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#plant-tree">Plant Tree</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#map">Tree Map</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#pledge">Make Pledge</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Newsletter</h4>
+      <p>Stay updated with our latest initiatives</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email">
+        <button type="submit">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 GreenRoots. All Rights Reserved. Made with 💚 for a greener planet.</p>
+  </div>
+</footer>
+
+<!-- Scroll to top button -->
+<div class="scroll-to-top" id="scrollToTop">
+  <i class="fas fa-chevron-up"></i>
+</div>
+
+
+<script src="enhanced-script.js"></script>
+</body>
+</html>
