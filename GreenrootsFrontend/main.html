@@ -68,9 +68,6 @@
           <i class="fas fa-map-marked-alt"></i>
           <span>Tree Map</span>
         </a>
-        <a href="#pledge" class="nav-link">
-          <i class="fas fa-handshake"></i>
-          <span>Pledge</span>
         </a>
         <a href="#contact" class="nav-link">
           <i class="fas fa-envelope"></i>
@@ -136,7 +133,7 @@
         <div class="stat-icon">
           <i class="fas fa-tree"></i>
         </div>
-        <h3 class="stat-number" data-count="24680">0</h3>
+        <h3 class="stat-number" data-count="3">0</h3>
         <p class="stat-label">Trees Planted</p>
         <div class="stat-progress">
           <div class="stat-bar" data-width="85%"></div>
@@ -146,7 +143,7 @@
         <div class="stat-icon">
           <i class="fas fa-users"></i>
         </div>
-        <h3 class="stat-number" data-count="3142">0</h3>
+        <h3 class="stat-number" data-count="10">0</h3>
         <p class="stat-label">Community Members</p>
         <div class="stat-progress">
           <div class="stat-bar" data-width="72%"></div>
@@ -156,7 +153,7 @@
         <div class="stat-icon">
           <i class="fas fa-city"></i>
         </div>
-        <h3 class="stat-number" data-count="18">0</h3>
+        <h3 class="stat-number" data-count="3">0</h3>
         <p class="stat-label">Cities Covered</p>
         <div class="stat-progress">
           <div class="stat-bar" data-width="60%"></div>
@@ -166,8 +163,8 @@
         <div class="stat-icon">
           <i class="fas fa-globe-asia"></i>
         </div>
-        <h3 class="stat-number" data-count="1250">0</h3>
-        <p class="stat-label">CO₂ Offset (kg)</p>
+        <h3 class="stat-number" data-count="2">0</h3>
+        <p class="stat-label">Active Events</p>
         <div class="stat-progress">
           <div class="stat-bar" data-width="90%"></div>
         </div>
@@ -265,12 +262,12 @@
           <i class="fas fa-clock"></i>
           Recent Plantings
         </button>
-        <button class="control-btn" data-filter="native">
+        <!-- <button class="control-btn" data-filter="native">
           <i class="fas fa-leaf"></i>
           Native Species
-        </button>
+        </button> -->
       </div>
-      <div class="map-stats">
+      <!-- <div class="map-stats">
         <div class="map-stat">
           <span class="stat-value" id="totalTrees">156</span>
           <span class="stat-label">Total Trees</span>
@@ -279,13 +276,13 @@
           <span class="stat-value" id="activeAreas">12</span>
           <span class="stat-label">Active Areas</span>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="map-container" data-aos="zoom-in" data-aos-delay="200">
       <div id="mumbai-map" class="interactive-map"></div>
       <div class="map-legend">
-        <h4>Legend</h4>
+        <!-- <h4>Legend</h4>
         <div class="legend-item">
           <div class="legend-marker new-tree"></div>
           <span>Recently Planted (< 30 days)</span>
@@ -296,8 +293,8 @@
         </div>
         <div class="legend-item">
           <div class="legend-marker native-tree"></div>
-          <span>Native Species</span>
-        </div>
+          <span>Native Species</span> -->
+        <!-- </div> -->
       </div>
     </div>
 
@@ -522,28 +519,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="corporatePartnershipForm">
+        <form id="corporateForm">
           <div class="form-group">
             <label>Company Name</label>
-            <input type="text" id="corporateName" placeholder="Your company name" required>
+            <input type="text" id="corpCompanyName" placeholder="Your company name" required>
           </div>
           <div class="form-group">
             <label>Contact Person</label>
-            <input type="text" id="corporateContact" placeholder="Full name" required>
+            <input type="text" id="corpContactPerson" placeholder="Full name" required>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" id="corporateEmail" placeholder="corporate@company.com" required>
+              <input type="email" id="corpEmail" placeholder="corporate@company.com" required>
             </div>
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="tel" id="corporatePhone" placeholder="Contact number" required>
+              <input type="text" id="corpPhone" placeholder="Contact number" required>
             </div>
           </div>
           <div class="form-group">
             <label>Company Size</label>
-            <select id="corporateSize" required>
+            <select id="corpCompanySize" type="text" required>
               <option value="">Select size...</option>
               <option value="small">Small (1-50 employees)</option>
               <option value="medium">Medium (51-200 employees)</option>
@@ -553,7 +550,7 @@
           </div>
           <div class="form-group">
             <label>Partnership Interest</label>
-            <select id="corporateInterest" required>
+            <select id="corpInterest" type="text" required>
               <option value="">Select interest...</option>
               <option value="csr">CSR Initiative</option>
               <option value="team-building">Team Building Event</option>
@@ -564,11 +561,11 @@
           </div>
           <div class="form-group">
             <label>Expected Number of Trees</label>
-            <input type="number" id="corporateTreeCount" min="50" placeholder="Minimum 50 trees" required>
+            <input type="number" id="corpExpectedTrees" min="50" placeholder="Minimum 50 trees" required>
           </div>
           <div class="form-group">
             <label>Preferred Timeline</label>
-            <select id="corporateTimeline" required>
+            <select id="corpTimeline" type="text" required>
               <option value="">Select timeline...</option>
               <option value="immediate">Within 1 month</option>
               <option value="short">1-3 months</option>
@@ -578,9 +575,9 @@
           </div>
           <div class="form-group">
             <label>Additional Details</label>
-            <textarea id="corporateDetails" rows="4" placeholder="Tell us about your goals and expectations..."></textarea>
+            <textarea id="corpMessage" rows="4" placeholder="Tell us about your goals and expectations..."></textarea>
           </div>
-          <button type="submit" class="btn btn-primary btn-large ripple-effect">
+          <button type="button" class="btn btn-primary" onclick="submitCorporateForm()">
             <i class="fas fa-paper-plane"></i>
             Request Partnership
           </button>
@@ -617,9 +614,11 @@
             </div>
           </div>
         </div>
-<button class="btn btn-small btn-primary ripple-effect" onclick="openEventRegistration('mumbai-monsoon')">
-  <i class="fas fa-user-plus"></i> Register Now
-</button>      </div>
+        <button class="btn btn-primary btn-small ripple-effect"
+        onclick="openEventRegistration('mumbai-monsoon')">
+        <i class="fas fa-user-plus"></i> Register Now
+        </button>
+     </div>
       
       <div class="event-card" data-aos="fade-up" data-aos-delay="200">
         <div class="event-date">
@@ -740,76 +739,6 @@
     </div>
   </section>
 
-  <!-- Pledge Section -->
-  <section id="pledge" class="pledge-section" data-aos="fade-up">
-    <div class="section-header">
-      <h2 class="section-title">Make Your Pledge</h2>
-      <div class="section-divider"></div>
-      <p class="section-description">Commit to making Mumbai greener, one tree at a time</p>
-    </div>
-    <div class="pledge-container">
-      <form class="pledge-form" data-aos="fade-right">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="pledgeName">Full Name</label>
-            <input type="text" id="pledgeName" placeholder="Your Name" required>
-          </div>
-          <div class="form-group">
-            <label for="pledgeEmail">Email Address</label>
-            <input type="email" id="pledgeEmail" placeholder="your@email.com" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="treeCount">Number of Trees</label>
-            <input type="number" id="treeCount" min="1" placeholder="How many trees?" required>
-          </div>
-          <div class="form-group">
-            <label for="pledgeArea">Preferred Area</label>
-            <select id="pledgeArea" required>
-              <option value="">Select area...</option>
-              <option value="south-mumbai">South Mumbai</option>
-              <option value="central-mumbai">Central Mumbai</option>
-              <option value="western-suburbs">Western Suburbs</option>
-              <option value="eastern-suburbs">Eastern Suburbs</option>
-              <option value="navi-mumbai">Navi Mumbai</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="pledgeMessage">Message (Optional)</label>
-          <textarea id="pledgeMessage" rows="4" placeholder="Share your motivation..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-large ripple-effect">
-          <i class="fas fa-handshake"></i>
-          Make Pledge
-        </button>
-      </form>
-      <div class="pledge-visual" data-aos="fade-left">
-        <div class="pledge-impact">
-          <h3>Your Impact</h3>
-          <div class="impact-metrics">
-            <div class="metric">
-              <i class="fas fa-leaf"></i>
-              <span class="metric-value">25kg</span>
-              <span class="metric-label">CO₂ absorbed/year per tree</span>
-            </div>
-            <div class="metric">
-              <i class="fas fa-tint"></i>
-              <span class="metric-value">150L</span>
-              <span class="metric-label">Water filtered/day per tree</span>
-            </div>
-            <div class="metric">
-              <i class="fas fa-wind"></i>
-              <span class="metric-value">2°C</span>
-              <span class="metric-label">Temperature reduction</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Contact Section -->
   <section id="contact" class="contact-section" data-aos="fade-up">
     <div class="section-header">
@@ -845,7 +774,7 @@
             <p>Mumbai, Maharashtra</p>
           </div>
         </div>
-        <div class="social-links">
+        <!-- <div class="social-links">
           <a href="#" class="social-link">
             <i class="fab fa-facebook"></i>
           </a>
@@ -858,23 +787,23 @@
           <a href="#" class="social-link">
             <i class="fab fa-linkedin"></i>
           </a>
-        </div>
+        </div> -->
       </div>
       <div class="contact-form" data-aos="fade-left">
         <form id="contactForm">
           <div class="form-group">
-            <input type="text" placeholder="Your Name" required>
+            <input type="text" id="contactName" placeholder="Your Name" required>
           </div>
           <div class="form-group">
-            <input type="email" placeholder="Your Email" required>
+            <input type="email" id="contactEmail" placeholder="Your Email" required>
           </div>
           <div class="form-group">
-            <input type="text" placeholder="Subject" required>
+            <input type="text" id="contactSubject" placeholder="Subject" required>
           </div>
           <div class="form-group">
-            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <textarea rows="5" id="contactMessage" placeholder="Your Message" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary ripple-effect">
+          <button type="button" class="btn btn-primary" onclick="submitContactForm()">
             <i class="fas fa-paper-plane"></i>
             Send Message
           </button>
@@ -911,8 +840,7 @@
     <div class="footer-section">
       <h4>Support</h4>
       <ul>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#pledge">Make Pledge</a></li>
+        <li><a href="#contact">Contact</a></li> 
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
       </ul>

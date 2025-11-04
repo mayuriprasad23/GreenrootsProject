@@ -17,89 +17,89 @@ const quotes = [
   "In every walk with nature, one receives far more than they seek",
 ];
 
-// Sample tree data for Mumbai
-const sampleTreeData = [
-  {
-    id: 1,
-    lat: 19.076,
-    lng: 72.8777,
-    species: "Mango",
-    planter: "Arjun Sharma",
-    date: "2024-10-15",
-    native: true,
-    type: "mature",
-  },
-  {
-    id: 2,
-    lat: 19.0596,
-    lng: 72.8295,
-    species: "Neem",
-    planter: "Priya Patel",
-    date: "2024-10-20",
-    native: true,
-    type: "new",
-  },
-  {
-    id: 3,
-    lat: 19.1176,
-    lng: 72.906,
-    species: "Banyan",
-    planter: "Mumbai Green Club",
-    date: "2024-09-30",
-    native: true,
-    type: "mature",
-  },
-  {
-    id: 4,
-    lat: 19.033,
-    lng: 72.8697,
-    species: "Gulmohar",
-    planter: "Ravi Kumar",
-    date: "2024-10-25",
-    native: false,
-    type: "new",
-  },
-  {
-    id: 5,
-    lat: 19.0825,
-    lng: 72.8428,
-    species: "Coconut",
-    planter: "Coastal Care Team",
-    date: "2024-10-10",
-    native: false,
-    type: "mature",
-  },
-  {
-    id: 6,
-    lat: 19.0544,
-    lng: 72.8326,
-    species: "Neem",
-    planter: "Sneha Joshi",
-    date: "2024-10-28",
-    native: true,
-    type: "new",
-  },
-  {
-    id: 7,
-    lat: 19.1197,
-    lng: 72.8464,
-    species: "Mango",
-    planter: "Green Warriors",
-    date: "2024-09-15",
-    native: true,
-    type: "mature",
-  },
-  {
-    id: 8,
-    lat: 19.0176,
-    lng: 72.8562,
-    species: "Banyan",
-    planter: "Nature Lovers",
-    date: "2024-10-01",
-    native: true,
-    type: "mature",
-  },
-];
+// // Sample tree data for Mumbai
+// const sampleTreeData = [
+//   {
+//     id: 1,
+//     lat: 19.076,
+//     lng: 72.8777,
+//     species: "Mango",
+//     planter: "Arjun Sharma",
+//     date: "2024-10-15",
+//     native: true,
+//     type: "mature",
+//   },
+//   {
+//     id: 2,
+//     lat: 19.0596,
+//     lng: 72.8295,
+//     species: "Neem",
+//     planter: "Priya Patel",
+//     date: "2024-10-20",
+//     native: true,
+//     type: "new",
+//   },
+//   {
+//     id: 3,
+//     lat: 19.1176,
+//     lng: 72.906,
+//     species: "Banyan",
+//     planter: "Mumbai Green Club",
+//     date: "2024-09-30",
+//     native: true,
+//     type: "mature",
+//   },
+//   {
+//     id: 4,
+//     lat: 19.033,
+//     lng: 72.8697,
+//     species: "Gulmohar",
+//     planter: "Ravi Kumar",
+//     date: "2024-10-25",
+//     native: false,
+//     type: "new",
+//   },
+//   {
+//     id: 5,
+//     lat: 19.0825,
+//     lng: 72.8428,
+//     species: "Coconut",
+//     planter: "Coastal Care Team",
+//     date: "2024-10-10",
+//     native: false,
+//     type: "mature",
+//   },
+//   {
+//     id: 6,
+//     lat: 19.0544,
+//     lng: 72.8326,
+//     species: "Neem",
+//     planter: "Sneha Joshi",
+//     date: "2024-10-28",
+//     native: true,
+//     type: "new",
+//   },
+//   {
+//     id: 7,
+//     lat: 19.1197,
+//     lng: 72.8464,
+//     species: "Mango",
+//     planter: "Green Warriors",
+//     date: "2024-09-15",
+//     native: true,
+//     type: "mature",
+//   },
+//   {
+//     id: 8,
+//     lat: 19.0176,
+//     lng: 72.8562,
+//     species: "Banyan",
+//     planter: "Nature Lovers",
+//     date: "2024-10-01",
+//     native: true,
+//     type: "mature",
+//   },
+// ];
 
 // DOM Content Loaded Event
 document.addEventListener("DOMContentLoaded", function () {
@@ -835,39 +835,39 @@ function initializeEventListeners() {
 // EVENT REGISTRATION HANDLER
 // =====================================================================
 
-function openEventRegistration(eventId) {
-  const eventDetails = {
-    'mumbai-monsoon': {
-      title: 'Mumbai Monsoon Plantation',
-      date: 'November 15, 2024',
-      location: 'Sanjay Gandhi National Park',
-      banner: 'Join us for a massive plantation drive in Mumbai\'s green lung!'
-    },
-    'corporate-green': {
-      title: 'Corporate Green Initiative',
-      date: 'November 22, 2024',
-      location: 'BKC Business District',
-      banner: 'Corporate teams unite for urban forest creation!'
-    }
-  };
+// function openEventRegistration(eventId) {
+//   const eventDetails = {
+//     'mumbai-monsoon': {
+//       title: 'Mumbai Monsoon Plantation',
+//       date: 'November 15, 2024',
+//       location: 'Sanjay Gandhi National Park',
+//       banner: 'Join us for a massive plantation drive in Mumbai\'s green lung!'
+//     },
+//     'corporate-green': {
+//       title: 'Corporate Green Initiative',
+//       date: 'November 22, 2024',
+//       location: 'BKC Business District',
+//       banner: 'Corporate teams unite for urban forest creation!'
+//     }
+//   };
   
-  const event = eventDetails[eventId];
+//   const event = eventDetails[eventId];
   
-  if (event) {
-    document.getElementById('eventTitle').textContent = event.title;
-    document.getElementById('eventId').value = eventId;
-    document.getElementById('eventInfoBanner').innerHTML = `
-      <div style="background: var(--gradient-primary); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <h4 style="margin: 0 0 10px 0;">${event.title}</h4>
-        <p style="margin: 5px 0;"><i class="fas fa-calendar"></i> ${event.date}</p>
-        <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
-        <p style="margin: 10px 0 0 0; font-style: italic;">${event.banner}</p>
-      </div>
-    `;
-  }
+//   if (event) {
+//     document.getElementById('eventTitle').textContent = event.title;
+//     document.getElementById('eventId').value = eventId;
+//     document.getElementById('eventInfoBanner').innerHTML = `
+//       <div style="background: var(--gradient-primary); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+//         <h4 style="margin: 0 0 10px 0;">${event.title}</h4>
+//         <p style="margin: 5px 0;"><i class="fas fa-calendar"></i> ${event.date}</p>
+//         <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
+//         <p style="margin: 10px 0 0 0; font-style: italic;">${event.banner}</p>
+//       </div>
+//     `;
+//   }
   
-  openModal('eventRegistrationModal');
-}
+//   openModal('eventRegistrationModal');
+// }
 
 function handleEventRegistration(e) {
   e.preventDefault();
@@ -902,11 +902,6 @@ function handleEventRegistration(e) {
   }, 2000);
 }
 
-  // Pledge form submission
-  const pledgeForm = document.querySelector(".pledge-form");
-  if (pledgeForm) {
-    pledgeForm.addEventListener("submit", handlePledgeSubmission);
-  }
   // Event registration form submission
   const eventRegistrationForm = document.getElementById(
     "eventRegistrationForm"
@@ -1058,42 +1053,6 @@ function handleAddTree(e) {
 
   // Animate to new tree location
   map.setView([treeData.lat, treeData.lng], 15, { animate: true });
-}
-
-
-function handlePledgeSubmission(e) {
-  e.preventDefault();
-
-  const formData = new FormData(e.target);
-  const pledgeData = {
-    name:
-      formData.get("pledgeName") || document.getElementById("pledgeName").value,
-    email:
-      formData.get("pledgeEmail") ||
-      document.getElementById("pledgeEmail").value,
-    treeCount:
-      formData.get("treeCount") || document.getElementById("treeCount").value,
-    area:
-      formData.get("pledgeArea") || document.getElementById("pledgeArea").value,
-    message:
-      formData.get("pledgeMessage") ||
-      document.getElementById("pledgeMessage").value,
-  };
-
-  // Simulate API call
-  showLoadingState(e.target);
-
-  setTimeout(() => {
-    showNotification(
-      `🤝 Thank you ${pledgeData.name}! Your pledge to plant ${pledgeData.treeCount} trees has been recorded.`,
-      "success"
-    );
-    e.target.reset();
-    hideLoadingState(e.target);
-
-    // Trigger celebration animation
-    triggerCelebration();
-  }, 2000);
 }
 
 function handleContactSubmission(e) {
@@ -1377,9 +1336,7 @@ function hideLoadingState(form) {
     // Restore original button text based on form type
     if (form.id === "addTreeForm") {
       submitBtn.innerHTML = '<i class="fas fa-plus"></i> Add Tree';
-    } else if (form.classList.contains("pledge-form")) {
-      submitBtn.innerHTML = '<i class="fas fa-handshake"></i> Make Pledge';
-    } else {
+    }  else {
       submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
     }
   }
@@ -1968,43 +1925,63 @@ window.GreenRoots = {
 // =====================================================================
 // EVENT REGISTRATION FUNCTIONALITY
 // =====================================================================
+// EVENT REGISTRATION FUNCTIONALITY
 
-const eventDetails = {
-  "mumbai-monsoon": {
-    title: "Mumbai Monsoon Plantation",
-    date: "15th November 2024",
-    location: "Sanjay Gandhi National Park",
-    time: "7:00 AM - 12:00 PM",
-  },
-  "corporate-green": {
-    title: "Corporate Green Initiative",
-    date: "22nd November 2024",
-    location: "BKC Business District",
-    time: "8:00 AM - 1:00 PM",
-  },
-};
+    function openEventRegistration(eventId) {
 
-function openEventRegistration(eventId) {
-  const event = eventDetails[eventId];
-  if (!event) return;
+        const eventDetails = {
+            'mumbai-monsoon': {
+                title: 'Mumbai Monsoon Plantation',
+                date: 'November 15, 2024',
+                location: 'Sanjay Gandhi National Park',
+                banner: 'Join us for a massive plantation drive in Mumbai\'s green lung!'
+            },
+            'corporate-green': {
+                title: 'Corporate Green Initiative',
+                date: 'November 22, 2024',
+                location: 'BKC Business District',
+                banner: 'Corporate teams unite for urban forest creation!'
+            }
+        };
 
-  // Set event details
-  document.getElementById("eventTitle").textContent = event.title;
-  document.getElementById("eventId").value = eventId;
+        const event = eventDetails[eventId];
 
-  // Create info banner
-  const banner = document.getElementById("eventInfoBanner");
-  banner.innerHTML = `
-    <strong>${event.title}</strong>
-    <div style="margin-top: 0.5rem; display: grid; gap: 0.25rem;">
-      <span><i class="fas fa-calendar"></i> ${event.date}</span>
-      <span><i class="fas fa-map-marker-alt"></i> ${event.location}</span>
-      <span><i class="fas fa-clock"></i> ${event.time}</span>
-    </div>
-  `;
+        if (!event) {
+            alert("Invalid event selected!");
+            return;
+        }
 
-  openModal("eventRegistrationModal");
-}
+        // const userName = localStorage.getItem("userName");
+        const userEmail = localStorage.getItem("userEmail");
+
+        if (!userEmail) {
+            alert("⚠️ Please login first to register!");
+            return;
+        }
+
+        const data = {
+            // name: userName,
+            email: userEmail,
+            eventName: event.title
+        };
+
+        fetch("http://localhost:8080/api/events/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.text())
+        .then(msg => {
+            alert(`✅ Registered for ${event.title} successfully!`);
+        })
+        .catch(err => {
+            console.error(err);
+            alert("❌ Something went wrong while registering!");
+        });
+
+    }
+
+window.openEventRegistration = openEventRegistration;
 
 // Add event registration form handler to initialization
 const eventRegistrationForm = document.getElementById("eventRegistrationForm");
@@ -2150,6 +2127,115 @@ function submitCommunityForm() {
         alert("Something went wrong. Try again.");
     });
 }
+// // CONTACT FORM SUBMIT
+// document.getElementById("contactForm").addEventListener("submit", function(e) {
+//     e.preventDefault();
+
+//     const data = {
+//         name: document.getElementById("contactName").value,
+//         email: document.getElementById("contactEmail").value,
+//         subject: document.getElementById("contactSubject").value,
+//         message: document.getElementById("contactMessage").value
+//     };
+
+//     fetch("http://localhost:8080/api/contact/send", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(data)
+//     })
+//     .then(res => res.text())
+//     .then(msg => {
+//         alert(msg);
+//         document.getElementById("contactForm").reset();
+//     })
+//     .catch(err => {
+//         console.error(err);
+//         alert("❌ Error sending message!");
+//     });
+// });
+
+function submitContactForm() {
+    const data = {
+        name: document.getElementById("contactName").value,
+        email: document.getElementById("contactEmail").value,
+        subject: document.getElementById("contactSubject").value,
+        message: document.getElementById("contactMessage").value
+    };
+
+    fetch("http://localhost:8080/api/contact/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(msg => {
+        alert("✅ " + msg);
+        document.getElementById("contactForm").reset();
+    })
+    .catch(err => {
+        console.error(err);
+        alert("❌ Error sending message!");
+    });
+}
 
 
+// document.getElementById("corporateForm").addEventListener("submit", function(e) {
+//     e.preventDefault();
 
+//     const data = {
+//         companyName: document.getElementById("corpCompanyName").value,
+//         contactPerson: document.getElementById("corpContactPerson").value,
+//         email: document.getElementById("corpEmail").value,
+//         phone: document.getElementById("corpPhone").value,
+//         companySize: document.getElementById("corpCompanySize").value,
+//         partnershipInterest: document.getElementById("corpInterest").value,
+//         expectedTrees: document.getElementById("corpExpectedTrees").value,
+//         timeline: document.getElementById("corpTimeline").value,
+//         message: document.getElementById("corpMessage").value
+//     };
+
+//     fetch("http://localhost:8080/api/corporate/request", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(data)
+//     })
+//     .then(res => res.text())
+//     .then(msg => {
+//         alert(msg);
+//         document.getElementById("corporateForm").reset();
+//     })
+//     .catch(err => {
+//         console.error(err);
+//         alert("❌ Error submitting request!");
+//     });
+// });
+
+function submitCorporateForm() {
+
+    const data = {
+        companyName: document.getElementById("corpCompanyName").value,
+        contactPerson: document.getElementById("corpContactPerson").value,
+        email: document.getElementById("corpEmail").value,
+        phone: document.getElementById("corpPhone").value,
+        companySize: document.getElementById("corpCompanySize").value,
+        partnershipInterest: document.getElementById("corpInterest").value,
+        expectedTrees: document.getElementById("corpExpectedTrees").value,
+        timeline: document.getElementById("corpTimeline").value,
+        message: document.getElementById("corpMessage").value
+    };
+
+    fetch("http://localhost:8080/api/corporate/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(msg => {
+        alert(msg);
+        document.getElementById("corporateForm").reset();
+    })
+    .catch(err => {
+        console.error(err);
+        alert("❌ Error submitting partnership request!");
+    });
+}

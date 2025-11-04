@@ -124,7 +124,6 @@ body {
 [data-theme="dark"] .stats-section,
 [data-theme="dark"] .plant-section,
 [data-theme="dark"] .events-section,
-[data-theme="dark"] .pledge-section,
 [data-theme="dark"] .contact-section {
   background: var(--bg-primary);
 }
@@ -247,20 +246,6 @@ body {
 }
 
 [data-theme="dark"] .event-location {
-  color: var(--text-secondary);
-}
-
-/* Dark mode pledge visual */
-[data-theme="dark"] .pledge-visual {
-  background: var(--bg-secondary);
-  border: 1px solid rgba(76, 175, 80, 0.2);
-}
-
-[data-theme="dark"] .pledge-impact h3 {
-  color: var(--primary-light);
-}
-
-[data-theme="dark"] .metric-label {
   color: var(--text-secondary);
 }
 
@@ -1575,69 +1560,6 @@ section {
   background: var(--text-secondary);
 }
 
-/* Pledge Section */
-.pledge-section {
-  padding: 4rem 0;
-}
-
-.pledge-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.pledge-form {
-  background: white;
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-light);
-}
-
-.pledge-visual {
-  background: var(--bg-secondary);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-}
-
-.pledge-impact h3 {
-  color: var(--primary-color);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.impact-metrics {
-  display: grid;
-  gap: 1rem;
-}
-
-.metric {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: white;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-light);
-}
-
-.metric i {
-  color: var(--primary-color);
-  font-size: 1.5rem;
-  width: 30px;
-}
-
-.metric-value {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--primary-color);
-}
-
-.metric-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
 /* Contact Section */
 .contact-section {
   background: var(--bg-secondary);
@@ -1893,7 +1815,6 @@ section {
   }
   
   .mission-content,
-  .pledge-container,
   .contact-container {
     grid-template-columns: 1fr;
     gap: 2rem;
